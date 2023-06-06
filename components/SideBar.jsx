@@ -3,12 +3,13 @@ import React from 'react'
 import ProfileBar from './ProfileBar'
 import Image from 'next/image'
 import SearchBar from './SearchBar'
+import Link from 'next/link';
 
 
 
 const SideBar = ({people}) => {
   return (
-    <div className="w-[500px] h-full flex flex-col p-5 m-2  bg-gray-100">
+    <div className="w-full max-w-sm h-full flex flex-col p-5 m-2  bg-gray-100">
       <div className="w-full h-fit flex items-center justify-between mb-5">
         <ProfileBar name={"Ty Watson"} />
         <div className="ml-auto">
@@ -26,7 +27,28 @@ const SideBar = ({people}) => {
           {people.map((people) => <ProfileBar name={people.Name} key={people.id} />)}
         </div>
         
-
+        <div className='flex flex-col p-2 m-2 mt-auto'>
+          <Link href='dashboard/add' className='flex items-center mb-4'>
+            <Image 
+              src='/icons/user-plus-solid.svg'
+              alt='add user'
+              height={30}
+              width={30}
+              className='mr-2'
+            /> 
+            <p className='inline'>Add Friend</p>
+          </Link>
+          <Link href='dashboard/add' className='flex items-center'>
+            <Image 
+              src='/icons/user-plus-solid.svg'
+              alt='add user'
+              height={30}
+              width={30}
+              className='mr-2'
+            /> 
+            <p className='inline'>Friend Requests</p>
+          </Link>
+        </div>
       </div>
     </div>
   )
