@@ -1,18 +1,12 @@
-'use client';
-import Image from 'next/image'
 import React from 'react'
-import { authOptions } from '@/lib/auth'
-import { getServerSession } from 'next-auth'
+import Image from 'next/image'
 
-
-const ProfileBar =  ({ session}) => {
- 
-
+const FriendBar = ({friend}) => {
   return (
     <div className='flex items-center w-full relative'>
         <div className='mr-2'>
             <Image 
-            src={session?.user?.image || ''}
+            src={friend.image || ''}
             width={50} 
             height={40} 
             alt='profile_pic'
@@ -20,12 +14,12 @@ const ProfileBar =  ({ session}) => {
             />
         </div>
         <div className='flex flex-col'>
-          <h3 className='text-left'>{session?.user?.name}</h3>
-          <p className='text-xs '>{session?.user?.email}</p>
+          <h3 className='text-left'>{friend.name}</h3>
+          <p className='text-xs '>{friend.email}</p>
         </div>    
         
     </div>
   )
 }
 
-export default ProfileBar
+export default FriendBar
