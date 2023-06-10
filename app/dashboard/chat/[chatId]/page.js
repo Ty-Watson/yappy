@@ -8,6 +8,9 @@ import { notFound } from 'next/navigation'
 import { fetchRedis } from '@/helpers/redis'
 import { messageArrayValidator } from '@/lib/validations/message'
 import { db } from '@/lib/db'
+import FriendBar from '@/components/FriendBar'
+import Messages from '@/components/Messages'
+import ChatInput from '@/components/ChatInput'
 
 const people = [
   {
@@ -47,7 +50,7 @@ async function getChatMessages(chatId){
     notFound()
   }
 }
-
+//params come in automatically because /[chatId]
 const page = async ({params}) => {
   //destructuring params
   const {chatId} = params
@@ -68,30 +71,23 @@ const page = async ({params}) => {
   const initialMessages = await getChatMessages(chatId)
 
   return (
-    <div className='flex flex-row h-full w-full'>
+    
         
 
-        <div className='w-full flex flex-col justify-between'>
-          <div className='w-full h-[100px] m-4 rounded-xl flex  items-center bg-gray-200'>
-            <div className=''>
-              {params.chatId}
+        <div className='w-full flex flex-col justify-between  pr-28'>
+          <div className='w-full h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-gray-200'>
+            <div className='m-4'>
+              <FriendBar friend={chatPartner} />
             </div>
           </div>
+          <Messages initialMessages={initialMessages} sessionId={session.user.id} />
 
-          <div className='w-full m-4  bg-white h-[50px] rounded-full p-3 flex flex-row items-center justify-between'>
-            <input 
-              placeholder='Type a message'
-              className=' text-sm font-medium focus:border-black focus:outline-none focus:ring-0 peer w-[50%]'
-            
-            />
-            <div className='flex flex-row '>
-              <Image src='/icons/face-smile-regular.svg' alt='emoji' height={20} width={20}  className='mr-10'/>
-              <Image  src="/images/paper-plane-solid.svg" alt='send' height={20} width={20} className='mr-10'/>
-            </div>
-            
-          </div>
+          <ChatInput  chatPartner={chatPartner} chatId = {chatId}/>
+
+
+          
         </div>       
-    </div>
+    
   )
 }
 

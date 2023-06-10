@@ -25,7 +25,7 @@ useEffect(() => {
             }).length
             return (
                 <li key={friend.id}>
-                    <a href={`/dashboard/chat/${chatHrefConstructor(session.user.id, friend.id)}`}><FriendBar friend={friend} /></a>
+                    <a href={`/dashboard/chat/${chatHrefConstructor(session.user.id, friend.id)}`}><FriendBar friend={friend} unseenMessageCount={unseenMessageCount}/></a>
                 </li>
             )
         })}
