@@ -2,7 +2,10 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div>dashboard</div>
+    <main className='pt-8'>
+        <h1 className='font-bold text-5xl mb-8'>Recent Chats</h1>
+        
+    </main>
   )
 }
 

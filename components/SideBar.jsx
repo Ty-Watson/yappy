@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react'
 import ProfileBar from './ProfileBar'
 import Image from 'next/image'
 import SearchBar from './SearchBar'
@@ -12,6 +12,9 @@ import SideBarChatList from './SideBarChatList';
 
 
 const SideBar = ({people, session, unseenRequestCount, friends }) => {
+
+  const [searchInput, setSearchInput] = useState('');
+
   return (
     <div className="w-full max-w-sm h-full flex flex-col p-5 m-2  bg-gray-100">
       <div className="w-full h-fit flex items-center justify-between mb-5">
@@ -21,7 +24,7 @@ const SideBar = ({people, session, unseenRequestCount, friends }) => {
         </div>
       </div>
       <div className='w-full   rounded-3xl h-full flex flex-col p-5 relative align-center bg-white'>
-        <SearchBar  />
+        <SearchBar searchInput={searchInput} setSearchInput={setSearchInput} />
         {friends.length > 0 ? (
              <div className='text-xs font-semibold leading-6 text-gray-400 mt-5'>
                 Your Chats
@@ -32,7 +35,7 @@ const SideBar = ({people, session, unseenRequestCount, friends }) => {
         <nav className='flex flex-1 flex-col'>
             <ul role='list' className='flex flex-1 flex-col gap-y-7'>
                 <li>
-                  <SideBarChatList friends={friends} session={session}/>
+                  <SideBarChatList friends={friends} session={session} searchInput={searchInput}/>
                 </li>
             </ul>
         </nav>
