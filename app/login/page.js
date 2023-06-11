@@ -20,7 +20,7 @@ async function loginWithGoogle(){
 
   return <>
    
-    <div className='flex flex-col justify-center items-center w-full h-full'>
+    <div className='flex flex-col justify-center items-center w-full h-full '>
       <div>
         <Image src="/icons/logo-no-background.svg" height={150} width={150} alt='Logo'/>
       </div>
