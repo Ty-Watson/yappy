@@ -1,9 +1,11 @@
 import { fetchRedis } from "@/helpers/redis"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { pusherServer } from "@/lib/pusher"
 import { messageValidator } from "@/lib/validations/message"
 import { nanoid } from "nanoid"
 import { getServerSession } from "next-auth"
+import { toPusherKey } from "@/lib/utils"
 //5:51:29
 export async function POST(req){
     try {
@@ -42,6 +44,17 @@ export async function POST(req){
         }
 
         const message = messageValidator.parse(messageData)
+
+        //notify all connected chat room clients
+        //trigger(event subscribed too, event name want to trigger, data want to pass to front end)
+        //6:32:00
+        pusherServer.trigger(toPusherKey(`chat:${chatId}`), 'incoming-message', message)
+        //6:47:21 define what spreading is
+        pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), 'new_message', {
+            ...message,
+            senderImg: sender.image,
+            senderName: sender.name
+        })
 
         //all valid, send message
         await db.zadd(`chat:${chatId}:messages`, {

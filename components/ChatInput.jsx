@@ -10,6 +10,7 @@ const ChatInput = ({chatPartner, chatId}) => {
     const [input, setInput] = useState('')
 
     const sendMessage = async () => {
+        if(!input) return
         try {
             //await new Promise((resolve) => setTimeout(resolve, 1000))
             await axios.post('/api/message/send', {text: input, chatId})

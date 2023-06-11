@@ -3,13 +3,15 @@ import Image from 'next/image'
 import React from 'react'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
+import Link from 'next/link';
 
 
 const ProfileBar =  ({ session}) => {
  
 
   return (
-    <div className='flex items-center w-full relative'>
+    <Link href="/dashboard">
+      <div className='flex items-center w-full relative'>
         <div className='mr-2'>
             <Image 
             src={session?.user?.image || ''}
@@ -24,7 +26,9 @@ const ProfileBar =  ({ session}) => {
           <p className='text-xs '>{session?.user?.email}</p>
         </div>    
         
-    </div>
+      </div>
+    </Link>
+    
   )
 }
 

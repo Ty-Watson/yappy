@@ -35,7 +35,7 @@ const SideBar = ({people, session, unseenRequestCount, friends }) => {
         <nav className='flex flex-1 flex-col'>
             <ul role='list' className='flex flex-1 flex-col gap-y-7'>
                 <li>
-                  <SideBarChatList friends={friends} session={session} searchInput={searchInput}/>
+                  <SideBarChatList friends={friends} sessionId={session.user.id} searchInput={searchInput}/>
                 </li>
             </ul>
         </nav>

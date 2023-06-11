@@ -3,12 +3,60 @@ import { chatHrefConstructor } from '@/lib/utils'
 import { usePathname, useRouter } from 'next/navigation'
 import {useEffect, useState} from 'react'
 import FriendBar from './FriendBar';
+import { toast } from 'react-hot-toast';
+import { toPusherKey } from '@/lib/utils';
+import UnseenChatToast from './UnseenChatToast';
+import { pusherClient } from '@/lib/pusher';
 //4:46:18
-const SideBarChatList = ({friends, session, searchInput}) => {
+const SideBarChatList = ({friends, sessionId, searchInput}) => {
 const router = useRouter()
 const pathname = usePathname()
 const [unseenMessages, setUnseenMessages] = useState([])
-console.log(`SEARCHINPUT ${searchInput}`)
+//6:45:00
+//listening to incoming unseen message to pop up a toast notification
+useEffect(() => {
+    pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`))
+    pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`))
+
+    const newFriendHandler = (newFriend) => {
+      console.log("received new user", newFriend)
+    //   setActiveChats((prev) => [...prev, newFriend])
+    }
+
+    const chatHandler = (message) => {
+        console.log('new chat message', message)
+      const shouldNotify =
+        pathname !==
+        `/dashboard/chat/${chatHrefConstructor(sessionId, message.senderId)}`
+
+      if (!shouldNotify) return
+
+      // should be notified
+      toast.custom((t) => (
+        <UnseenChatToast
+          t={t}
+          sessionId={sessionId}
+          senderId={message.senderId}
+          senderImg={message.senderImg}
+          senderMessage={message.text}
+          senderName={message.senderName}
+        />
+      ))
+
+      setUnseenMessages((prev) => [...prev, message])
+    }
+
+    pusherClient.bind('new_message', chatHandler)
+    pusherClient.bind('new_friend', newFriendHandler)
+
+    return () => {
+      pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:chats`))
+      pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:friends`))
+
+      pusherClient.unbind('new_message', chatHandler)
+      pusherClient.unbind('new_friend', newFriendHandler)
+    }
+  }, [pathname, sessionId, router])
 
 useEffect(() => {
     if(pathname?.includes('chat')){
@@ -28,7 +76,7 @@ useEffect(() => {
                 const unseenMessageCount = unseenMessages.filter((unseenMsg) => unseenMsg.senderId === friend.id).length;
                 return (
                 <li key={friend.id}>
-                    <a href={`/dashboard/chat/${chatHrefConstructor(session.user.id, friend.id)}`}>
+                    <a href={`/dashboard/chat/${chatHrefConstructor(sessionId, friend.id)}`}>
                     <FriendBar friend={friend} unseenMessageCount={unseenMessageCount} />
                     </a>
                 </li>
@@ -41,7 +89,7 @@ useEffect(() => {
                 }).length
                 return (
                     <li key={friend.id}>
-                        <a href={`/dashboard/chat/${chatHrefConstructor(session.user.id, friend.id)}`}><FriendBar friend={friend} unseenMessageCount={unseenMessageCount}/></a>
+                        <a href={`/dashboard/chat/${chatHrefConstructor(sessionId, friend.id)}`}><FriendBar friend={friend} unseenMessageCount={unseenMessageCount}/></a>
                     </li>
                 )
             })
