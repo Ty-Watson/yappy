@@ -1,11 +1,10 @@
-const upstashRedisRestUrl = 'https://caring-hen-37009.upstash.io'
-const authToken = 'AZCRASQgZjBiZTg1OGMtMTA0My00Y2EyLTg1MmMtZjNkMTk2ZTU0OGUzOTQ2ZTVjOWQyOGYxNGE1NmE3NGJiYWRhY2RiOGE1NzY='
+const upstashRedisRestUrl = process.env.UPSTASH_REDIS_REST_URL
+const authToken = process.env.UPSTASH_REDIS_REST_TOKEN
 
 
 
 export async function fetchRedis(command, ...args) {
   const commandUrl = `${upstashRedisRestUrl}/${command}/${args.join('/')}`
-  console.log(commandUrl)
 
   const response = await fetch(commandUrl, {
     headers: {
@@ -13,14 +12,12 @@ export async function fetchRedis(command, ...args) {
     },
     cache: 'no-store',
   })
-
-  console.log(`RESPONSE: ${response}`)
-
+  
   if (!response.ok) {
     throw new Error(`Error executing Redis command: ${response.statusText}`)
   }
 
   const data = await response.json()
-  console.log(`DATA FROM DATABASE: ${data.result}`)
+  
   return data.result
 }

@@ -22,11 +22,10 @@ const page = async () => {
                 senderEmail: senderParsed.email
             }
         })
-    )
-    console.log(incomingFriendRequests);
+    )    
   return (
     <main className='pt-8'>
-        <h1 className='font-bold text-5xl mb-8'>Requests</h1>
+        <h1 className='font-bold text-5xl mb-8 dark:text-white'>Requests</h1>
         <div className='flex flex-col gap-4'>
             <FriendRequests  incomingFriendRequests={incomingFriendRequests} sessionId={session.user.id}/>
         </div>

@@ -7,8 +7,7 @@ html{
   position: relative;
 }
 body{
-  height: 100%;
-  background-color: #f3f4f6;
+  height: 100%; 
 }
 
 .scrollbar-w-2::-webkit-scrollbar {

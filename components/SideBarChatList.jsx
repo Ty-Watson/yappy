@@ -12,19 +12,19 @@ const SideBarChatList = ({friends, sessionId, searchInput}) => {
 const router = useRouter()
 const pathname = usePathname()
 const [unseenMessages, setUnseenMessages] = useState([])
+//const [activeChats, setActiveChats] = useState(second)
 //6:45:00
 //listening to incoming unseen message to pop up a toast notification
 useEffect(() => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`))
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`))
 
-    const newFriendHandler = (newFriend) => {
-      console.log("received new user", newFriend)
-    //   setActiveChats((prev) => [...prev, newFriend])
+    const newFriendHandler = () => {    
+      router.refresh()  
+       //setActiveChats((prev) => [...prev, newFriend])
     }
 
-    const chatHandler = (message) => {
-        console.log('new chat message', message)
+    const chatHandler = (message) => {        
       const shouldNotify =
         pathname !==
         `/dashboard/chat/${chatHrefConstructor(sessionId, message.senderId)}`

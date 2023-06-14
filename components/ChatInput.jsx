@@ -4,6 +4,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 import Image from 'next/image'
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { Send, Smile } from 'lucide-react';
 
 const ChatInput = ({chatPartner, chatId}) => {
     const textareaRef = useRef(null)
@@ -34,12 +35,14 @@ const ChatInput = ({chatPartner, chatId}) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={`Message ${chatPartner.name}`}
-            className='block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 leading-6 sm:py-1.5'
+            className='block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 leading-6 sm:py-1.5 dark:text-white'
             />
-            <div className='flex flex-row '>
-                <Image src='/icons/face-smile-regular.svg' alt='emoji' height={20} width={20}  className='mr-10' />
+            <div className='flex flex-row mr-2 gap-3'>
+                <button>
+                    <Smile className='h-6 w-6 dark:text-white' />
+                </button>
                 <button onClick={sendMessage}>
-                    <Image  src="/images/paper-plane-solid.svg" alt='send' height={20} width={20} className='mr-10' />
+                    <Send className='h-6 w-6 dark:text-indigo-600 mr-5' />
                 </button>
                 
             </div>            

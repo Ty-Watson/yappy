@@ -12,28 +12,6 @@ import FriendBar from '@/components/FriendBar'
 import Messages from '@/components/Messages'
 import ChatInput from '@/components/ChatInput'
 
-const people = [
-  {
-    "id": 1,
-    "Name": "John Smith"
-  },
-  {
-    "id": 2,
-    "Name": "Ron Smith"
-  },
-  {
-    "id": 3,
-    "Name": "Tyler Smith"
-  },
-  {
-    "id": 4,
-    "Name": "Phil Smith"
-  },
-  {
-    "id": 5,
-    "Name": "Baker Smith"
-  },
-]
 //4:19:05
 async function getChatMessages(chatId){
   try {
@@ -70,23 +48,17 @@ const page = async ({params}) => {
   const chatPartner = (await db.get(`user:${chatPartnerId}`))
   const initialMessages = await getChatMessages(chatId)
 
-  return (
-    
+  return (   
         
-
         <div className='w-full flex flex-col justify-between  pr-28'>
-          <div className='w-full h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-gray-200'>
-            <div className='m-4'>
+          <div className='w-full h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-white dark:bg-[#323645]'>
+            <div className='m-4 xl:w-1/3 w-full'>
               <FriendBar friend={chatPartner} />
             </div>
           </div>
           <Messages initialMessages={initialMessages} sessionId={session.user.id} chatPartner={chatPartner} sessionImg={session.user.image} chatId={chatId} />
-
-          <ChatInput  chatPartner={chatPartner} chatId = {chatId}/>
-
-
-          
-        </div>       
+          <ChatInput  chatPartner={chatPartner} chatId = {chatId}/>          
+        </div>      
     
   )
 }

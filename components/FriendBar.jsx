@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const FriendBar = ({friend, unseenMessageCount}) => {
   return (
-    <div className='flex items-center w-full relative  text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-full'>
+    <div className='flex items-center w-full relative  text-gray-700 hover:text-indigo-600 hover:bg-gray-50 rounded-full dark:hover:bg-indigo-600'>
         <div className='mr-2'>
             <Image 
             src={friend.image || ''}
@@ -15,8 +15,8 @@ const FriendBar = ({friend, unseenMessageCount}) => {
         </div>
         <div className='flex flex-row'>
           <div className='flex flex-col '>
-            <h3 className='text-left leading-6 font-semibold'>{friend.name}</h3>
-            <p className='text-xs font-semibold'>{friend.email}</p>
+            <h3 className='text-left leading-6 font-semibold dark:text-white'>{friend.name}</h3>
+            <p className='text-xs font-semibold dark:text-white'>{friend.email}</p>
           </div>
           {unseenMessageCount > 0 ? (
             <div className='bg-indigo-600 font-medium text-xs text-white w-4 h-4 rounded-full flex justify-center items-center'>

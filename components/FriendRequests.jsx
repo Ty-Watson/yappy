@@ -55,12 +55,12 @@ const FriendRequests = ({sessionId, incomingFriendRequests}) => {
   return (
     <>
     {friendRequests.length === 0 ? (
-      <p className='text-sm text-zinc-500'>Nothing to show here...</p>
+      <p className='text-sm text-zinc-500 dark:text-white'>Nothing to show here...</p>
     ) : (
       friendRequests.map((request) => (       
         <div key={request.senderId} className='flex gap-4 items-center'>
-          <UserPlus className='text-black' />
-          <p className='font-medium text-lg'>{request.senderEmail}</p>
+          <UserPlus className='text-black dark:text-white' />
+          <p className='font-medium text-lg dark:text-white'>{request.senderEmail}</p>
           <button
             onClick={() => acceptFriend(request.senderId)}
             aria-label='accept friend'

@@ -22,8 +22,8 @@ const ProfileBar =  ({ session}) => {
             />
         </div>
         <div className='flex flex-col'>
-          <h3 className='text-left'>{session?.user?.name}</h3>
-          <p className='text-xs '>{session?.user?.email}</p>
+          <h3 className='text-left dark:text-white'>{session?.user?.name}</h3>
+          <p className='text-xs  dark:text-white'>{session?.user?.email}</p>
         </div>    
         
       </div>
