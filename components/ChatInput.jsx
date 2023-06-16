@@ -37,7 +37,7 @@ const ChatInput = ({chatPartner, chatId}) => {
             placeholder={`Message ${chatPartner.name}`}
             className='block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 leading-6 sm:py-1.5 dark:text-white'
             />
-            <div className='flex flex-row mr-2 gap-3'>
+            <div className='flex flex-row md:mr-2 gap-3'>
                 <button>
                     <Smile className='h-6 w-6 dark:text-white' />
                 </button>

@@ -12,16 +12,15 @@ const SideBarChatList = ({friends, sessionId, searchInput}) => {
 const router = useRouter()
 const pathname = usePathname()
 const [unseenMessages, setUnseenMessages] = useState([])
-//const [activeChats, setActiveChats] = useState(second)
+const [activeChats, setActiveChats] = useState(friends)
 //6:45:00
 //listening to incoming unseen message to pop up a toast notification
 useEffect(() => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`))
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`))
 
-    const newFriendHandler = () => {    
-      router.refresh()  
-       //setActiveChats((prev) => [...prev, newFriend])
+    const newFriendHandler = (newFriend) => {      
+       setActiveChats((prev) => [...prev, newFriend])
     }
 
     const chatHandler = (message) => {        
@@ -70,7 +69,7 @@ useEffect(() => {
     <ul role='list' className='max-h-[25rem] overflow-y-auto -mx-2 space-y-1'>
         {searchInput ? (
              // Filter friends and assign the result to searchResult
-            friends
+            activeChats
             .filter((friend) => friend.name.includes(searchInput))
             .map((friend) => {
                 const unseenMessageCount = unseenMessages.filter((unseenMsg) => unseenMsg.senderId === friend.id).length;
@@ -83,7 +82,7 @@ useEffect(() => {
                 );
             })
         ) : (
-            friends.sort().map((friend) => {
+            activeChats.sort().map((friend) => {
                 const unseenMessageCount = unseenMessages.filter((unseenMsg) => {
                     return unseenMsg.senderId === friend.id
                 }).length

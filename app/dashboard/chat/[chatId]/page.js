@@ -45,13 +45,14 @@ const page = async ({params}) => {
   }
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1
-  const chatPartner = (await db.get(`user:${chatPartnerId}`))
+  const chatPartnerRaw = await fetchRedis('get', `user:${chatPartnerId}`)
+  const chatPartner = JSON.parse(chatPartnerRaw)
   const initialMessages = await getChatMessages(chatId)
 
   return (   
         
-        <div className='w-full flex flex-col justify-between  pr-28'>
-          <div className='w-full h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-white dark:bg-[#323645]'>
+        <div className='w-full flex flex-col justify-between h-full md:pr-28'>
+          <div className='w-full md:h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-white dark:bg-[#323645]'>
             <div className='m-4 xl:w-1/3 w-full'>
               <FriendBar friend={chatPartner} />
             </div>
