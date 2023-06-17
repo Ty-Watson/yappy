@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { Fragment, useEffect, useState } from 'react'
 import SignOutButton from './SignOutButton'
 import FriendRequestSidebarOptions from './FriendRequestSidebarOptions'
-import SidebarChatList from './SidebarChatList'
+import SideBarChatList from './SideBarChatList'
 
 import { usePathname } from 'next/navigation'
 
@@ -83,7 +83,7 @@ const MobileChatLayout = ({ friends, session, sidebarOptions, unseenRequestCount
                             role='list'
                             className='flex flex-1 flex-col gap-y-7'>
                             <li>
-                              <SidebarChatList
+                              <SideBarChatList
                                 friends={friends}
                                 sessionId={session.user.id}
                               />
