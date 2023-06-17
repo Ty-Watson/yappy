@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { pusherServer } from "@/lib/pusher"
 import { toPusherKey } from "@/lib/utils"
 import { getServerSession } from "next-auth"
-import {OK, z} from "zod"
+import {z} from "zod"
 
 //3:49:00
 export async function POST(req){

@@ -51,9 +51,9 @@ const page = async ({params}) => {
 
   return (   
         
-        <div className='w-full flex flex-col justify-between h-full md:pr-28'>
-          <div className='w-full md:h-[100px] mr-10 m-6 rounded-xl flex  items-center bg-white dark:bg-[#323645]'>
-            <div className='m-4 xl:w-1/3 w-full'>
+        <div className='w-full flex flex-col justify-between h-full lg:pr-28'>
+          <div className='w-full md:h-[100px] lg:mr-10 lg:m-6 md:mt-16 mt-16 rounded-xl flex  items-center bg-white dark:bg-[#323645]'>
+            <div className='md:m-4 xl:w-1/3 w-full items-end m-2'>
               <FriendBar friend={chatPartner} />
             </div>
           </div>
