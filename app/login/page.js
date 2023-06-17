@@ -20,15 +20,15 @@ async function loginWithGoogle(){
 
   return <>
    
-    <div className='flex flex-col justify-center items-center w-full h-full '>
+    <div className='flex flex-col justify-center items-center w-full h-full  px-2 sm:px-0 '>
       <div>
         <Image src="/icons/logo-no-background.svg" height={150} width={150} alt='Logo'/>
       </div>
-      <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
+      <h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-black'>
                 Sign in to your account
       </h2>
-      <div className='w-[350px] h-[100px] rounded-lg flex justify-center items-center p-2 m-2'>
-        <button onClick={loginWithGoogle} className='w-full h-10 border border-gray-300 rounded-full text-white bg-indigo-600'>
+      <div className='sm:w-[350px] w-[250px] h-[100px] rounded-lg flex justify-center items-center p-2 m-2'>
+        <button onClick={loginWithGoogle} className='w-full h-10  rounded-full text-white bg-indigo-600'>
           <div className='w-full flex justify-center items-center'>
             <p className='mr-2'>Google</p>
             <svg
