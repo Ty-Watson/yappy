@@ -10,7 +10,7 @@ const page = () => {
 
 async function loginWithGoogle(){
     try {        
-        await signIn('google')
+        await signIn()
     } catch (error) {
         toast.error("Something went wrong");
     }
