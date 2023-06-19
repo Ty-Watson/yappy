@@ -10,7 +10,7 @@ const page = () => {
 
 async function loginWithGoogle(){
     try {        
-        await signIn()
+        await signIn('google')
     } catch (error) {
         toast.error("Something went wrong");
     }
@@ -28,7 +28,7 @@ async function loginWithGoogle(){
                 Sign in to your account
       </h2>
       <div className='sm:w-[350px] w-[250px] h-[100px] rounded-lg flex justify-center items-center p-2 m-2'>
-        <button onClick={() => signIn()} className='w-full h-10  rounded-full text-white bg-indigo-600'>
+        <button onClick={loginWithGoogle} className='w-full h-10  rounded-full text-white bg-indigo-600'>
           <div className='w-full flex justify-center items-center'>
             <p className='mr-2'>Google</p>
             <svg
