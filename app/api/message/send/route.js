@@ -48,9 +48,9 @@ export async function POST(req){
         //notify all connected chat room clients
         //trigger(event subscribed too, event name want to trigger, data want to pass to front end)
         //6:32:00
-        pusherServer.trigger(toPusherKey(`chat:${chatId}`), 'incoming-message', message)
+        await pusherServer.trigger(toPusherKey(`chat:${chatId}`), 'incoming-message', message)
         //6:47:21 define what spreading is
-        pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), 'new_message', {
+        await pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), 'new_message', {
             ...message,
             senderImg: sender.image,
             senderName: sender.name
